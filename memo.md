@@ -228,3 +228,11 @@ number = "abc"  # 実行時に型が変わる（エラーにならない）
 
 **最近のトレンド**  
 最近は**静的型付けのメリットを取り入れた言語**（TypeScript, Kotlin, Swift, Rust など）が増えており、**静的型付け + 型推論**で柔軟性を持たせるアプローチが主流になりつつあります。
+
+# Laravel Sailを用いたLaravel＋Dockerの環境構築　苦戦ログ
+
+[Laravel公式ドキュメントーLaravel Sail](https://laravel.com/docs/11.x/installation#sail-on-windows)
+
+[Docker公式ドキュメント-Windows 上の Docker Desktop WSL 2 バックエンド](https://docs.docker.com/desktop/features/wsl/)
+
+[Zenn-[Windows] 新しくPC買ったのでWSL2を導入してみる](https://zenn.dev/ap_com/articles/install-wsl2-on-windows)

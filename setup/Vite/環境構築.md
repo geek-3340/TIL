@@ -1,0 +1,251 @@
+# Vite環境構築
+
+## viteでproject file作成
+
+> [Vite公式ドキュメント](https://ja.vite.dev/guide/)
+
+### 1. viteプロジェクト作成
+
+コマンドラインにて以下を入力
+
+```bash
+npm create vite@latest
+```
+
+### 2. Project nameを.にする（現在のフォルダに構築）
+
+```bash
+Project name .
+```
+
+※1 フォルダごと構築する際は以下(例:my-vite-project)
+
+```bash
+Project name my-vite-project
+```
+
+あるいはnpmの際に以下
+
+```bash
+npm create vite@latest my-vite-project
+```
+
+※2 viteのverを指定するときはnpmの際に以下
+
+(例:vite5.3.1)コマンドには最後の数字は打たない↓
+
+```bash
+npm create vite@5.3
+```
+
+### 3. frameworkを選択する（React,Vue etc）
+
+### 4. variantを選択（Typescript,JavaScript etc）<br>
+
+したらプロジェクトが生成される
+
+### 5. node_modulesインストール
+コマンドラインにて以下を入力
+```bash
+npm install
+```
+
+これによりpackage.jsonに書いてある内容がinstall
+され、node_modulesが生成される
+### 6. ローカルホスト起動・停止
+コマンドラインにて以下を入力
+```bash
+npm run dev
+```
+ローカルホストが起動される
+
+停止するときはCtrl+C
+## ESlint・Prettierのセットアップ
+
+> [ESlint公式ドキュメント](https://www.npmjs.com/package/eslint)
+
+> [Prettier公式ドキュメント](https://www.npmjs.com/package/prettier)
+
+> [ESlint config Prettier公式ドキュメント](https://www.npmjs.com/package/eslint-config-prettier)
+
+### 1. インストール
+
+コマンドラインにて以下を入力
+
+```bash
+npm i eslint prettier eslint-config-prettier
+```
+package.jsonでインストールを確認
+- ESlint<br>
+  JavaScriptのコーディングルールを管理
+- Prettier<br>
+  コードフォーマッター
+- eslint-config-prettier<br>
+  ESlintとPrettierの互換性を管理<br>
+  設定がぶつからないようにする
+
+### 2. Prettierプラグインインストール
+
+VScode拡張機能でPrettierをインストール
+
+※これをインストールしてないと次項の設定ができない
+
+### 3. Prettierの設定
+
+ルートフォルダに.prettierrcファイルを作成
+
+※設定ファイルは.(ドット)から始まる事が多い
+
+.prettierrcを編集(以下例)
+
+```json
+{
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": true,
+  "doubleQuote": true,
+  "printWidth": 80,
+  "bracketSpacing": true,
+  "endOfLine": "lf"
+}
+```
+
+VScode設定画面→Prettier→Prettier:config Path<br>
+./.prettierrcに設定
+
+### 4. Prettierの対象外設定
+
+ルートフォルダに.prettierignoreファイルを作成
+
+※ここに設定したフォルダはPrettierのフォーマット対象から外す
+
+.prettierignornを編集(以下例)
+
+```
+node_modules/
+dist/
+```
+
+### 5. ESlintの設定
+
+ルートフォルダに.eslintrcファイルを作成
+
+※拡張子が.js .ts .cjs .config.js 等あるが、無しでも良い
+
+.eslintrcを編集(以下例)
+
+```
+{
+    "extends": [
+      // "eslint:recommended",
+      "eslint-config-prettier"
+    ],
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "paths": [
+            "src"
+          ],
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      }
+    },
+    "rules": {
+      "no-unused-vars": [
+        "error"
+      ],
+      "no-undef": "error"
+    }
+  }
+```
+
+## Viteの設定
+
+> [Viteの設定](https://ja.vite.dev/config/)
+
+
+### 1. 設定ファイル作成
+ルートディレクトリにvite.config.jsを作成
+
+vite.config.jsにdefineConfigを記述
+
+```Javascript
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  //ここに設定を記載する
+})
+```
+### 2. ディレクトリ設定を記載
+defineConfig内に以下を追加
+```Javascript
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  //rootディレクトリ指定（npm run devで見るとこ）
+  //ここで指定したPathはHTMLで読み込む際はrootになる
+  root: 'src/pages/',
+
+  //publicディレクトリ指定（変更しない画像・動画・音声などの静的ファイル）
+  publicDir: '../../public/',
+
+  //buildの設定
+  build: {
+    //buildのエンドポイント
+    outDir: '../../dist/',
+
+    //build時にエンドポイントのファイルを消すか
+    emptyOutDir: true,
+  }
+})
+```
+## Vite設定（buildオプションrollupOptionsについて）
+> [Glob npm](https://www.npmjs.com/package/glob)
+
+rollupOptionsとはbuild設定をより詳細にできるオブジェクト
+
+まずGlobをインストール
+
+コマンドラインにて以下を入力
+```bash
+npm i glob
+```
+package.jsonでインストールを確認
+
+vite.config.jsにてインポート
+```javascript
+import { globSync } from 'glob';
+import path from 'path';
+```
+chatGPTで勉強する
+
+## EJSの環境構築
+### 1. インストール
+npmでEJSをインストール<br>
+コマンドラインにて以下を入力
+
+```bash
+npm i vite-plugin-ejs
+```
+package.jsonでインストールを確認
+### 2. vite設定ファイルにEJSを追加
+vite.config.jsのdefineConfigに以下を追記
+```JavaScript
+  // インポート
+  import { ViteEjsPlugin } from "vite-plugin-ejs";
+  import { mainData } from './src/data/mainData';
+  plugins: [
+    ViteEjsPlugin(mainData,{
+      ejs:{
+        beautify:true, // シンタックスを整えてくれる
+      }
+    })
+  ],
+  // 第一引数に前ページ共通で使う設定(上記は別ファイルに設定）
+  // 第二引数に細かい設定
+```

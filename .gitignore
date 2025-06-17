@@ -1,2 +1,3 @@
-# careerファイルはGitで管理しない
+# このファイルとcareerファイルはGitで管理しない
 career/
+.gitignore

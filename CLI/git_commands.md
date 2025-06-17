@@ -33,10 +33,12 @@ git commit -m "message" # コミット（メッセージ付き）
 ## 📤 リモートとの連携
 
 ```bash
-git remote add origin <URL> # リモートリポジトリを登録
-git push -u origin main     # 初回の push（以後は `git push` だけでOK）
-git push                    # ローカルの変更をリモートに送信
-git pull                    # リモートの変更を取得してマージ
+git remote add origin <URL>         # リモートリポジトリを登録
+git push -u origin main             # 初回の push（以後は `git push` だけでOK）
+git push                            # ローカルの変更をリモートに送信
+git pull                            # リモートの変更を取得してマージ
+git remote -v                       # カレントディレクトリのリモートURLを確認
+git remote set-url origin <URL>     # 参照するリモートリポジトリのURLを変更
 ```
 
 ---
